@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Main Page{% endblock %}
+
+<div class="position-absolute top-50 start-50 translate-middle">
+    {% block content %}
+    {% if not tasks %}
+    <h1>Here are no notes yet</h1>
+    {% else %}
+    {% for task in tasks %}
+    <div class="card p-3 mb-3">
+
+        <h3>{{ task.title }}</h3>
+        <p>{{ task.text }}</p>
+
+        {% if task.status==1%}
+        <p>done ✅</p>
+        <form method="POST" action="/already_done/{{ task.id }}/delete">
+            <button class="btn btn-danger" type="submit">Delete ?</button>
+        </form>
+        {% else %}
+        <form method="POST" action="/main/{{ task.id }}/done">
+            <button class="btn btn-success" type="submit">Mark as Done</button>
+        </form>
+        {% endif %}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endblock %}
+</div>

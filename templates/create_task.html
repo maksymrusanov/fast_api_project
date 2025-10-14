@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}New Note{% endblock %}
+
+{% block content %}
+<div class="container mt-5" style="max-width: 700px;">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h3 class="card-title mb-4">Create a New Note</h3>
+
+            <form method="POST" id="noteForm">
+                <div class="mb-3">
+                    <label for="inputTitle" class="form-label">Title</label>
+                    <input type="text" name="title" class="form-control" id="title" placeholder="name of note" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="textareaContent" class="form-label">Content</label>
+                    <textarea name="text" class="form-control" id="text" rows="6" placeholder="type your note"
+                        required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Save Note</button>
+            </form>
+
+            {% if message %}
+            <div id="outputArea" class="mt-4 alert alert-success">{{ message }}</div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

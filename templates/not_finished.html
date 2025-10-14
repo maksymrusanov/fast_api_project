@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}marked done{% endblock %}
+
+{% block content %}
+{% if not tasks %}
+<h1>nothing to do for now</h1>
+{% else %}
+{% for task in tasks %}
+<h1>Title</h1>
+<p>{{ task.title }}</p>
+<h2>Text</h2>
+<p>{{ task.text }}</p>
+{% endfor %}
+{% endif %}
+{% endblock %}
