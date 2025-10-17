@@ -2,15 +2,29 @@
 
 {% block title %}marked done{% endblock %}
 
-{% block content %}
-{% if not tasks %}
-<h1>nothing to do for now</h1>
-{% else %}
-{% for task in tasks %}
-<h1>Title</h1>
-<p>{{ task.title }}</p>
-<h2>Text</h2>
-<p>{{ task.text }}</p>
-{% endfor %}
-{% endif %}
-{% endblock %}
+<div class="position-absolute top-50 start-50 translate-middle">
+    {% block content %}
+    {% if not tasks %}
+    <h1>Here are no notes yet</h1>
+    {% else %}
+    {% for task in tasks %}
+    <div class="card p-3 mb-3">
+
+        <h3>{{ task.title }}</h3>
+        <p>{{ task.text }}</p>
+
+        {% if task.status==1%}
+        <p>done ✅</p>
+        <form method="POST" action="/already_done/{{ task.id}}">
+            <button class="btn btn-danger" type="submit">Delete ?</button>
+        </form>
+        {% else %}
+        <form method="POST" action="/{{task.id}}">
+            <button class="btn btn-success" type="submit">Mark as Done</button>
+        </form>
+        {% endif %}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endblock %}
+</div>
