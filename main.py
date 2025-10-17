@@ -1,3 +1,4 @@
+
 from os import getenv
 from typing import Annotated, Optional
 from contextlib import asynccontextmanager
@@ -22,9 +23,15 @@ class Task(SQLModel, table=True):
     status: bool = Field(index=True, default=False)
 
 
-DB_PORT = getenv('DB_PORT', '3306')
-DB_NAME = getenv('DB_NAME')
-DB_PASSWORD = getenv('DB_PASSWORD')
+DB_HOST = getenv("DB_HOST", "127.0.0.1")
+DB_PORT = getenv("DB_PORT", "3306")
+DB_USER = getenv("DB_USER", "root")
+DB_PASSWORD = getenv("DB_PASSWORD", "")
+DB_NAME = getenv("DB_NAME", "mydb")
+
+SERVER_URL = f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/"
+DATABASE_URL = f"{SERVER_URL}{DB_NAME}"
+
 
 SERVER_URL = f"mysql+pymysql://root:{DB_PASSWORD}@db:{DB_PORT}/"
 DATABASE_URL = f"{SERVER_URL}{DB_NAME}"
