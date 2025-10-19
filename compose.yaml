@@ -9,7 +9,7 @@ services:
     volumes:
       - db_data:/var/lib/mysql
     ports:
-    - ${DB_PORT}{DB_HOST_PORT}
+    - "${DB_PORT}{DB_HOST_PORT}"
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 5s
